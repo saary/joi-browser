@@ -1,6 +1,7 @@
 'use strict';
 
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: './src/joi-browser.js',
@@ -28,7 +29,15 @@ module.exports = {
   node: {
     crypto: 'empty',
     net: 'empty',
-    dns: 'empty'
+    tls: 'empty',
+    dns: 'empty',
+  },
+  resolve: {
+    packageAlias: 'browser',
+    alias: {
+      isemail: path.join(__dirname, './shims/isemail.js'),
+      hoek: path.join(__dirname, './shims/hoek.js'),
+    }
   },
   plugins: [
     // Since moment is now external, we can comment this out
